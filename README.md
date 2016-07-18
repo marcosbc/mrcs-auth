@@ -2,8 +2,7 @@
 
 ## Introduction
 
-This module is a simple JWT-based authentication and authorization
-server.
+This is a simple JWT-based authentication and authorization server.
 
 It does not handle user creation, which has to be done separately.
 The [mrcs-user-management](https://github.com/marcosbc/mrcs-user-management)
