@@ -18,7 +18,7 @@ to access your server via your browser or with cURL:
 curl -u myuser http://localhost:3000/auth
 ```
 
-### Liveness and readiness
+### Liveness and readiness
 
 This server implements a liveness and readiness page, accessible at
 `/liveness` and `/readiness` respectively:
