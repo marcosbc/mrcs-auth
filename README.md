@@ -17,6 +17,13 @@ to access your server via your browser or with cURL:
 curl -u myuser http://localhost:3000/auth
 ```
 
+### Gulp tasks
+
+A few Gulp tasks are implemented:
+
+- `gulp list`: List all token entries in the database.
+- `gulp clean`: Clean all previously created tokens in the database.
+
 ### Liveness and readiness
 
 This server implements a liveness and readiness page, accessible at
