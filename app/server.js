@@ -2,7 +2,7 @@
 // Dependencies and variables
 var path = require('path');
 var mongoose = require('mongoose');
-var waitForMongoose = require('wait-for-mongoose');
+var waitForMongo = require('wait-for-mongo');
 var microservice = require('microservice-skeleton');
 var authUtils = require('./lib');
 var config;
@@ -19,7 +19,7 @@ microservice.registerHook('express', (expressInstance) => {
   app = expressInstance;
   app.set('config', config);
   app.set('authUtils', authUtils);
-  waitForMongoose(config.mongoDbUri, {
+  waitForMongo(config.mongoDbUri, {
     timeout: config.mongoDbTimeout
   }, (err) => {
     if (err) {
