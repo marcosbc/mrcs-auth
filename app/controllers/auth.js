@@ -39,24 +39,30 @@ module.exports = {
             if (securityUtils.compareHash(credentials.pass, data.password)) {
               // Create the token and insert
               loggedIn = true;
-              tokenData = jwt.sign({
+              jwt.sign({
                 uid: data._id,
                 username: data.username
-              }, securityConfig.secret);
-              newToken = new Token({
-                data: tokenData,
-                expirationDate: new Date(Date.now() + tokenDuration)
-              });
-              newToken.save((err, data) => {
+              }, securityConfig.secret, {
+                algorithm: 'HS256'
+              }, function (err, tokenData) {
                 if (err) {
-                  console.error(err);
-                  errorResponse(res, err);
-                } else {
-                  res.json({
-                    token: tokenData,
-                    expiration: data.expirationDate
-                  });
+                  return errorResponse(res, err);
                 }
+                newToken = new Token({
+                  data: tokenData,
+                  expirationDate: new Date(Date.now() + tokenDuration)
+                });
+                newToken.save((err, data) => {
+                  if (err) {
+                    console.error(err);
+                    errorResponse(res, err);
+                  } else {
+                    res.json({
+                      token: tokenData,
+                      expiration: data.expirationDate
+                    });
+                  }
+                });
               });
             }
           }
