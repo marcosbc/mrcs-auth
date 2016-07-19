@@ -19,7 +19,9 @@ microservice.registerHook('express', (expressInstance) => {
   app = expressInstance;
   app.set('config', config);
   app.set('authUtils', authUtils);
-  waitForMongoose(config.mongoDbUri, (err) => {
+  waitForMongoose(config.mongoDbUri, {
+    timeout: config.mongoDbTimeout
+  }, (err) => {
     if (err) {
       console.error('Timeout exceeded connecting to MongoDB');
       process.exit(1);
